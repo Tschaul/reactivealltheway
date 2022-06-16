@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class ReactiveallthewayApplication
+class ReactiveAllTheWayApplication
 
 fun main(args: Array<String>) {
-	runApplication<ReactiveallthewayApplication>(*args)
+	runApplication<ReactiveAllTheWayApplication>(*args)
 }
