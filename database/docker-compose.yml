@@ -1,14 +1,26 @@
 version: '3.7'
 services:
-  mongodb_container:
-    image: mongo:latest
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: mongo
-      MONGO_INITDB_ROOT_PASSWORD: 12345
+# first, we define the three mongo servers that will act as replicas
+# here, we steup the hostname ports, and startup command
+# which is the same as discussed in the previous section
+  mongo:
+    hostname: mongo
+    image: mongo
+    expose:
+      - 27017
     ports:
-      - 27017:27017
-    volumes:
-      - mongodb_data_container:/data/db
+      - 27017:27017 
+    restart: always
+    command: mongod --replSet my-mongo-set
 
-volumes:
-  mongodb_data_container:
+# finally, we can define the initialization server
+# this runs the `rs.initiate` command to intialize
+# the replica set and connect the three servers to each other
+  mongoinit:
+    image: mongo
+    # this container will exit after executing the command
+    restart: "no"
+    depends_on:
+      - mongo
+    command: >
+      mongo --host mongo:27017 --eval 'rs.initiate()'
