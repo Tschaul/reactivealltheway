@@ -1,0 +1,5 @@
+subscription AllMovies {
+    allMovies {
+        title
+    }
+}

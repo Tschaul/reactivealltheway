@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AllMoviesGQL } from 'src/generated/graphql';
 
 @Component({
   selector: 'app-movie-list',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly allMovies: AllMoviesGQL) { }
 
   ngOnInit(): void {
   }
