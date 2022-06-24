@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { AllMoviesGQL } from 'src/generated/graphql';
 
 @Component({
@@ -8,7 +9,9 @@ import { AllMoviesGQL } from 'src/generated/graphql';
 })
 export class MovieListComponent implements OnInit {
 
-  constructor(private readonly allMovies: AllMoviesGQL) { }
+  constructor(private readonly allMoviesGQL: AllMoviesGQL) { }
+
+  allMovies$ = this.allMoviesGQL.subscribe().pipe(map(it => it.data?.allMovies ?? [] ))
 
   ngOnInit(): void {
   }

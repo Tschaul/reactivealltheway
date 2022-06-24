@@ -1,5 +1,7 @@
 subscription AllMovies {
     allMovies {
         title
+        description
+        likes
     }
 }

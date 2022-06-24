@@ -1,12 +1,46 @@
 import {NgModule} from '@angular/core';
 import {ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
-import {ApolloClientOptions, InMemoryCache} from '@apollo/client/core';
 import {HttpLink} from 'apollo-angular/http';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { split } from '@apollo/client/core';
+import { getMainDefinition } from '@apollo/client/utilities';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
+import {ApolloClientOptions, InMemoryCache} from '@apollo/client/core';
 
-const uri = 'localhost:8080/graphql'; // <-- add the URL of the GraphQL server here
+export function createSplitLink(httpLinkCreator: HttpLink) {
+
+  const httpLink = httpLinkCreator.create({
+    uri: 'localhost:8080/graphql'
+  });
+  
+  const wsClient = new SubscriptionClient(
+    `ws://localhost:8080/subscriptions`,
+    {
+      reconnect: true,
+      lazy: true,
+    });
+
+  const wsLink = new WebSocketLink(wsClient);
+
+  return split(
+    ({ query }) => {
+      const definition = getMainDefinition(query);
+      console.log("split",query,
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription')
+      return (
+        definition.kind === 'OperationDefinition' &&
+        definition.operation === 'subscription'
+      );
+    },
+    wsLink,
+    httpLink
+  );
+}
+
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
-    link: httpLink.create({uri}),
+    link: createSplitLink(httpLink),
     cache: new InMemoryCache(),
   };
 }

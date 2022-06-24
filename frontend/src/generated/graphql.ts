@@ -80,12 +80,14 @@ export type Subscription = {
 export type AllMoviesSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllMoviesSubscription = { __typename?: 'Subscription', allMovies: Array<{ __typename?: 'Movie', title: string }> };
+export type AllMoviesSubscription = { __typename?: 'Subscription', allMovies: Array<{ __typename?: 'Movie', title: string, description: string, likes: number }> };
 
 export const AllMoviesDocument = gql`
     subscription AllMovies {
   allMovies {
     title
+    description
+    likes
   }
 }
     `;

@@ -1,5 +1,5 @@
-<app-movie-card></app-movie-card>
-<app-movie-card></app-movie-card>
-<app-movie-card></app-movie-card>
+<ng-container *ngIf="allMovies$ | async as allMovies">
+    <app-movie-card *ngFor="let movie of allMovies" [title]="movie.title" [description]="movie.description" [likes]="movie.likes"></app-movie-card>
+</ng-container>
   
 
