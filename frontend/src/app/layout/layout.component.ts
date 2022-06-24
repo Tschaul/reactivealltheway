@@ -1,0 +1,24 @@
+import { Component, OnInit } from '@angular/core';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+import {MatButtonModule} from '@angular/material/button'; 
+import {MatIconModule} from '@angular/material/icon'; 
+
+@Component({
+  standalone: true,
+  selector: 'app-layout',
+  templateUrl: './layout.component.html',
+  styleUrls: ['./layout.component.scss'],
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule
+  ]
+})
+export class LayoutComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
