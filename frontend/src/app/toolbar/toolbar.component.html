@@ -11,8 +11,8 @@
     <button mat-icon-button class="example-icon favorite-icon" (click)="onInsertMovie()">
       <mat-icon>library_add</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon">
-      <mat-icon>info</mat-icon>
+    <button mat-icon-button class="example-icon" (click)="onTogglePage()">
+      <mat-icon>{{getTogglePageIcon()}}</mat-icon>
     </button>
   </mat-toolbar>
   

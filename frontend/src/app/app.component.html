@@ -1,6 +1,7 @@
-<app-toolbar></app-toolbar>
+<app-toolbar (togglePage)="onTogglePage()"></app-toolbar>
 <div class="background">
-  <div class="main">
-    <app-movie-list></app-movie-list>
+  <div class="main" [ngSwitch]="page">
+    <app-movie-list *ngSwitchCase="'list'"></app-movie-list>
+    <app-about-page *ngSwitchCase="'about'"></app-about-page>
   </div>
 </div>

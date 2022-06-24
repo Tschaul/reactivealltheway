@@ -8,6 +8,7 @@ import { ToolbarModule } from './toolbar/toolbar.module';
 import { CommonModule } from '@angular/common';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AboutPageModule } from './about-page/about-page.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     ToolbarModule,
     MovieListModule,
     GraphQLModule,
-    HttpClientModule
+    HttpClientModule,
+    AboutPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

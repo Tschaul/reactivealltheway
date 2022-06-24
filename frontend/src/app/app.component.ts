@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'reactivealltheway';
+  page: 'list' | 'about' = 'list'
+
+  onTogglePage() {
+    switch (this.page) {
+      case 'about':
+        this.page = 'list'
+        break;
+      case 'list':
+        this.page = 'about'
+        break;
+    }
+  }
 }

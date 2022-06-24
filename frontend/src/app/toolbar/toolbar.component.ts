@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
 import { InsertMovieGQL, MovieStatsGQL } from 'src/generated/graphql';
@@ -17,6 +17,12 @@ export class ToolbarComponent implements OnInit {
     private movieStatsGQL: MovieStatsGQL
   ) { }
 
+  @Input()
+  page: 'list' | 'about' = 'list'
+
+  @Output()
+  togglePage = new EventEmitter()
+
   movieStats$ = this.movieStatsGQL.subscribe().pipe(map(it => it.data?.movieStats))
 
   ngOnInit(): void {
@@ -33,6 +39,17 @@ export class ToolbarComponent implements OnInit {
         this.insertMovieGQL.mutate(result).subscribe()
       }
     });
+  }
+
+  getTogglePageIcon() {
+    switch (this.page) {
+      case 'about': return 'list'
+      case 'list': return 'info'
+    }
+  }
+
+  onTogglePage() {
+    this.togglePage.emit()
   }
 
 }
