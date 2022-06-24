@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MovieListModule } from './movie-list/movie-list.module';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { CommonModule } from '@angular/common';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     BrowserAnimationsModule,
     ToolbarModule,
-    MovieListModule
+    MovieListModule,
+    GraphQLModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
