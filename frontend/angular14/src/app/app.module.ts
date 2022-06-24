@@ -3,20 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MovieListModule } from './movie-list/movie-list.module';
-import { ToolbarModule } from './toolbar/toolbar.module';
-import { CommonModule } from '@angular/common';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { MovieListComponent } from './movie-list/movie-list.component';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
-    ToolbarModule,
-    MovieListModule
+    ToolbarComponent,
+    MovieListComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
