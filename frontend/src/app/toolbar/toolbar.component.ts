@@ -5,16 +5,16 @@ import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   standalone: true,
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss'],
+  selector: 'app-toolbar',
+  templateUrl: './toolbar.component.html',
+  styleUrls: ['./toolbar.component.scss'],
   imports: [
     MatToolbarModule,
     MatButtonModule,
     MatIconModule
   ]
 })
-export class LayoutComponent implements OnInit {
+export class ToolbarComponent implements OnInit {
 
   constructor() { }
 
