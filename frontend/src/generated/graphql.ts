@@ -77,14 +77,74 @@ export type Subscription = {
   movieStats: MovieStats;
 };
 
+export type DeleteMovieMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteMovieMutation = { __typename?: 'Mutation', deleteMovie: string };
+
+export type LikeMovieMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type LikeMovieMutation = { __typename?: 'Mutation', likeMovie: string };
+
 export type AllMoviesSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllMoviesSubscription = { __typename?: 'Subscription', allMovies: Array<{ __typename?: 'Movie', title: string, description: string, likes: number }> };
+export type AllMoviesSubscription = { __typename?: 'Subscription', allMovies: Array<{ __typename?: 'Movie', id: string, title: string, description: string, likes: number }> };
 
+export type InsertMovieMutationVariables = Exact<{
+  title: Scalars['String'];
+  description: Scalars['String'];
+}>;
+
+
+export type InsertMovieMutation = { __typename?: 'Mutation', insertMovie: string };
+
+export type MovieStatsSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MovieStatsSubscription = { __typename?: 'Subscription', movieStats: { __typename?: 'MovieStats', moviesCount: number, totalLikes: number } };
+
+export const DeleteMovieDocument = gql`
+    mutation DeleteMovie($id: String!) {
+  deleteMovie(id: $id)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteMovieGQL extends Apollo.Mutation<DeleteMovieMutation, DeleteMovieMutationVariables> {
+    document = DeleteMovieDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const LikeMovieDocument = gql`
+    mutation LikeMovie($id: String!) {
+  likeMovie(id: $id)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class LikeMovieGQL extends Apollo.Mutation<LikeMovieMutation, LikeMovieMutationVariables> {
+    document = LikeMovieDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AllMoviesDocument = gql`
     subscription AllMovies {
   allMovies {
+    id
     title
     description
     likes
@@ -97,6 +157,41 @@ export const AllMoviesDocument = gql`
   })
   export class AllMoviesGQL extends Apollo.Subscription<AllMoviesSubscription, AllMoviesSubscriptionVariables> {
     document = AllMoviesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const InsertMovieDocument = gql`
+    mutation InsertMovie($title: String!, $description: String!) {
+  insertMovie(title: $title, description: $description)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class InsertMovieGQL extends Apollo.Mutation<InsertMovieMutation, InsertMovieMutationVariables> {
+    document = InsertMovieDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const MovieStatsDocument = gql`
+    subscription MovieStats {
+  movieStats {
+    moviesCount
+    totalLikes
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class MovieStatsGQL extends Apollo.Subscription<MovieStatsSubscription, MovieStatsSubscriptionVariables> {
+    document = MovieStatsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

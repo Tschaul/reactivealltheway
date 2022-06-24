@@ -1,0 +1,10 @@
+mutation InsertMovie($title: String!, $description: String!) {
+    insertMovie(title: $title, description: $description)
+}
+
+subscription MovieStats {
+    movieStats {
+        moviesCount
+        totalLikes
+    }
+}

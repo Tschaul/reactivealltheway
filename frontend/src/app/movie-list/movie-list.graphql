@@ -1,5 +1,6 @@
 subscription AllMovies {
     allMovies {
+        id
         title
         description
         likes

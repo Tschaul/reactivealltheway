@@ -10,7 +10,7 @@ import {ApolloClientOptions, InMemoryCache} from '@apollo/client/core';
 export function createSplitLink(httpLinkCreator: HttpLink) {
 
   const httpLink = httpLinkCreator.create({
-    uri: 'localhost:8080/graphql'
+    uri: 'http://localhost:8080/graphql'
   });
   
   const wsClient = new SubscriptionClient(
@@ -25,9 +25,6 @@ export function createSplitLink(httpLinkCreator: HttpLink) {
   return split(
     ({ query }) => {
       const definition = getMainDefinition(query);
-      console.log("split",query,
-      definition.kind === 'OperationDefinition' &&
-      definition.operation === 'subscription')
       return (
         definition.kind === 'OperationDefinition' &&
         definition.operation === 'subscription'

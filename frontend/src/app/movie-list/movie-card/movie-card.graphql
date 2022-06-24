@@ -1,0 +1,7 @@
+mutation DeleteMovie($id: String!) {
+    deleteMovie(id: $id)
+}
+
+mutation LikeMovie($id: String!) {
+    likeMovie(id: $id)
+}

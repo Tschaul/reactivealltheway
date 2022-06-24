@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Film hinzufügen</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>Titel</mat-label>
+        <input matInput (blur)="onTitleInput($event)">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Beschreibung</mat-label>
+        <textarea matInput rows="6" (blur)="onDescriptionInput($event)"></textarea>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions class="actions">
+    <button mat-button (click)="onNoClick()">Abbrechen</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Bestätigen</button>
+</div>
