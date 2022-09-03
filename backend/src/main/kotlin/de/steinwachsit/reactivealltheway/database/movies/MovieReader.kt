@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Flux
-import java.util.*
 import javax.annotation.PostConstruct
 
 @Component
@@ -31,9 +30,9 @@ class MovieReader(
     }
 
     fun all(): Flux<List<Movie>> {
-        val current = repository.findAll().collectList().map { it.map { it.toModel() } }
+        val currentList = repository.findAll().collectList().map { it.map { it.toModel() } }
 
-        return current.flatMapMany { initialMovies ->
+        return currentList.flatMapMany { initialMovies ->
             Flux.concat(
                 Flux.just(initialMovies),
                 changes.scan(initialMovies) { acc, changeStreamEvent ->
